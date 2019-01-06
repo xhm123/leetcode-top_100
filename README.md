@@ -60,3 +60,29 @@ class Solution(object):
             res = max(res, tmp)
         return res
 
+## 19. 删除链表的倒数第N个节点
+### 问题：给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。 链接：https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/
+### 代码：
+
+class Solution(object):
+
+    def removeNthFromEnd(self, head, n):
+        """
+        :type head: ListNode
+        :type n: int
+        :rtype: ListNode
+        """
+        result = ListNode(0)
+        result.next = head
+        first = result
+        second = result
+        index = 0
+        while True:
+            if first.next == None:
+                second.next = second.next.next
+                break
+            first = first.next
+            index += 1
+            if index > n:
+                second = second.next
+        return result.next
