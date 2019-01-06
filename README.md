@@ -95,6 +95,7 @@ class Solution(object):
     左括号必须用相同类型的右括号闭合。
     左括号必须以正确的顺序闭合。
     注意空字符串可被认为是有效字符串。
+    链接：https://leetcode-cn.com/problems/valid-parentheses/submissions/
 ### 思路：将这些字符串以键值对的形式存入字典，通过栈实现
 ### 代码：
 
