@@ -62,6 +62,7 @@ class Solution(object):
 
 ## 19. 删除链表的倒数第N个节点
 ### 问题：给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。 链接：https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/
+### 思路：获得一个快链表和一个慢链表，当快链表走n步后，慢链表开始走，当快链表到达终点时，慢链表到达-n的地方
 ### 代码：
 
 class Solution(object):
