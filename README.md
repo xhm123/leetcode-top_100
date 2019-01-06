@@ -42,3 +42,28 @@ class Solution(object):
         s1=s1[::-1]
         s2=s2[::-1]
         return [int(i) for i in str(int(s1)+int(s2))[::-1]]
+
+## 3.无重复字符的最长子串
+### 问题：给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度 链接：https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/
+### 代码：
+class Solution(object):
+
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        res = 0
+        if s is None or len(s) == 0:
+            return res
+        d = {}
+        tmp = 0
+        start = 0
+        for i in range(len(s)):
+            if s[i] in d and d[s[i]] >= start:
+                start = d[s[i]] + 1
+            tmp = i - start + 1
+            d[s[i]] = i
+            res = max(res, tmp)
+        return res
+
