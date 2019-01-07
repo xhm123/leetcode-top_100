@@ -38,6 +38,7 @@ class Solution(object):
 
 ## 3.无重复字符的最长子串
 ### 问题：给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度 链接：https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/
+### 思路：采用hashmap存储上一个字符出现的位置，若下一次出现这个字符，将下一次出现字符所在的位置和上一次所在的位置取差值+1，比较每次长度
 ### 代码：
 class Solution(object):
 
@@ -117,3 +118,36 @@ class Solution(object):
             else:
                 stack.append(item)
         return len(stack) == 1
+
+## 21. 合并两个有序链表
+### 问题：将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 
+    示例：
+    输入：1->2->4, 1->3->4
+    输出：1->1->2->3->4->4
+### 思路：新建一个链表，比较两个链表，轮询，将小的存入新的链表
+### 代码：
+class Solution(object):
+
+    def mergeTwoLists(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        """
+        head=ListNode(0)
+        dummp=head
+        while l1 and l2:
+            if l1.val>l2.val:
+                head.next=l2
+                l2=l2.next
+            else:
+                head.next=l1
+                l1=l1.next
+            head=head.next
+        if l1:
+            head.next=l1
+        if l2:
+            head.next=l2
+        return dummp.next
+        
+## 
