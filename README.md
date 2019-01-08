@@ -60,6 +60,118 @@ class Solution(object):
             d[s[i]] = i
             res = max(res, tmp)
         return res
+        
+## 4. 寻找两个有序数组的中位数
+### 问题：给定两个大小为 m 和 n 的有序数组 nums1 和 nums2。请你找出这两个有序数组的中位数，并且要求算法的时间复杂度为 O(log(m + n))。你可以假设 nums1 和 nums2 不会同时为空。
+### 思路：将两个数组合并，计算中位数
+### 代码：
+
+class Solution(object):
+
+    def findMedianSortedArrays(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: float
+        """
+        
+        nums1.extend(nums2)
+        res = nums1
+        if not res: 
+            return None
+        res.sort()
+        l = len(res)
+        if l % 2:
+            return res[l/2] / 1.0 
+        else : 
+            return (res[l/2] + res[(l/2)-1]) / 2.0
+            
+## 5. 最长回文子串
+### 问题：给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
+### 思路：暴力破解，时间复杂度有点高，
+### 代码：
+class Solution:
+
+    def longestPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        if not s:
+            return ""
+        if len(s)==1:
+            return s
+        l=[]
+        len1=len(s)
+        for index,i in enumerate(s):
+            for index_1,j in enumerate(s[:index:-1]):
+                s1=s[index:len1-index_1]
+                if s1==s1[::-1]:
+                    l.append(s1)
+                    break
+        d={}
+        if not l:
+            return s[-1]
+        for i in l:
+            d[i]=len(i)
+        return max(d, key=d.get)
+        
+## 11. 盛最多水的容器
+### 问题：给定 n 个非负整数 a1，a2，...，an，每个数代表坐标中的一个点 (i, ai) 。在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0)。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。说明：你不能倾斜容器，且 n 的值至少为 2  链接：https://leetcode-cn.com/problems/container-with-most-water/
+### 思路：动态规划，先比较最左边和最右边的高度，计算面积，如果左边的比右边的小，左边和右边无论如何哪一个组合都没有它们两组合面积大，左边向右移动1格，右边同理，获得最大
+### 代码：
+
+class Solution(object):
+
+    def maxArea(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        left = 0
+        right = len(height) - 1
+        max_res = 0
+        while left<right:
+            w=right-left
+            if height[left]<height[right]:
+                h=height[left]
+                left+=1
+            else:
+                h=height[right]
+                right-=1
+            if max_res<w*h:
+                max_res=w*h
+        return max_res
+        
+##17. 电话号码的字母组合
+### 问题：给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。 链接：https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/
+### 思路：递归，写一个函数处理两个串之间的组合，组合之后在和后面来的字符串用同样的方法两两组合
+### 代码：
+
+class Solution(object):
+
+    def letterCombinations(self, digits):
+        """
+        :type digits: str
+        :rtype: List[str]
+        """
+        hashmap={
+            '1':'','2':'abc','3':'def','4':'ghi','5':'jkl','6':'mno','7':'pqrs','8':'tuv','9':'wxyz'
+                }
+        if not digits:
+            return []
+        l=[i for i in hashmap[digits[0]]]
+        for i in digits[1:]:
+            x=hashmap[i]
+            l=self.convert(l,x)
+        return l
+    def convert(self,str1,str2):
+        res=[]
+        for i in range(len(str1)):
+            for j in range(len(str2)):
+                           res.append(str1[i]+str2[j])
+        return res
+                         
 
 ## 19. 删除链表的倒数第N个节点
 ### 问题：给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。 链接：https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/
