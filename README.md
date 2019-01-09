@@ -262,6 +262,87 @@ class Solution(object):
             head.next=l2
         return dummp.next
         
+## 23. 合并K个排序链表
+### 问题：合并 k 个排序链表，返回合并后的排序链表。请分析和描述算法的复杂度。
+### 思路：时间复杂度较高，先写一个合并两个链表的函数，再进行迭代递归，获得最后的链表
+### 代码：
+
+class Solution(object):
+
+    def mergeKLists(self, lists):
+        """
+        :type lists: List[ListNode]
+        :rtype: ListNode
+        """
+        if not lists:
+            return []
+        if len(lists)==1:
+            return lists[0]
+        l1=self.merge(lists[0],lists[1])
+        if len(lists)==2:
+            return l1
+        n=len(lists)
+        for i in range(2,n):
+            l1=self.merge(l1,lists[i])
+        return l1
+    def merge(self,l1,l2):
+        head=ListNode(0)
+        dummp=head
+        while l1 and l2:
+            if l1.val>l2.val:
+                head.next=l2
+                l2=l2.next
+            else:
+                head.next=l1
+                l1=l1.next
+            head=head.next
+        if l1:
+            head.next=l1
+        if l2:
+            head.next=l2
+        return dummp.next
+
+## 53. 最大子序和
+### 问题：给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。 链接：https://leetcode-cn.com/problems/maximum-subarray/
+### 思路：最简单的dp，不多说
+### 代码：
+
+class Solution(object):
+
+    def maxSubArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        dp=[i for i in nums]
+        n=len(dp)
+        for i in range(1,n):
+            dp[i]=max(dp[i],dp[i-1]+dp[i])
+        return max(dp)
+
+## 70. 爬楼梯
+### 问题：假设你正在爬楼梯。需要 n 阶你才能到达楼顶。每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？ 链接：https://leetcode-cn.com/problems/climbing-stairs/
+### 思路：斐波那契数列 f(n)=f(n-1)+f(n-2)
+### 代码：
+
+class Solution(object):
+
+    def climbStairs(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        if n == 1:
+            return 1
+        elif n == 2:
+            return 2
+        a,b=1,2
+        for i in range(2,n):
+            a,b=b,a+b
+        return b
+
+
+
 ## 543. 二叉树的直径
 ### 问题：给定一棵二叉树，你需要计算它的直径长度。一棵二叉树的直径长度是任意两个结点路径长度中的最大值。这条路径可能穿过根结点。 链接：https://leetcode-cn.com/problems/diameter-of-binary-tree/
 ### 思路：求二叉树直径的长度就是求二叉树两个节点到公共祖先节点的最大长度，可以通过比较每个节点左右两边的深度之和,进行递归比较

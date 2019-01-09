@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="26904ae9-2318-43dc-818a-4d642b06e96e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,12 +36,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="md" value="1130" />
+          <entry key="md" value="1414" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Markdown" value="1130" />
+          <entry key="Markdown" value="1414" />
         </counts>
       </usages-collector>
     </session>
@@ -53,8 +52,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="347">
-                <caret line="362" column="82" selection-start-line="362" selection-start-column="82" selection-end-line="362" selection-end-column="82" />
+              <first_editor relative-caret-position="407">
+                <caret line="327" lean-forward="true" selection-start-line="327" selection-end-line="327" />
               </first_editor>
               <second_editor />
             </state>
@@ -172,8 +171,8 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="347">
-            <caret line="362" column="82" selection-start-line="362" selection-start-column="82" selection-end-line="362" selection-end-column="82" />
+          <first_editor relative-caret-position="407">
+            <caret line="327" lean-forward="true" selection-start-line="327" selection-end-line="327" />
           </first_editor>
           <second_editor />
         </state>
