@@ -262,4 +262,143 @@ class Solution(object):
             head.next=l2
         return dummp.next
         
-## 
+## 543. 二叉树的直径
+### 问题：给定一棵二叉树，你需要计算它的直径长度。一棵二叉树的直径长度是任意两个结点路径长度中的最大值。这条路径可能穿过根结点。 链接：https://leetcode-cn.com/problems/diameter-of-binary-tree/
+### 思路：求二叉树直径的长度就是求二叉树两个节点到公共祖先节点的最大长度，可以通过比较每个节点左右两边的深度之和,进行递归比较
+### 代码：
+
+class Solution(object):
+
+    def diameterOfBinaryTree(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        if not root:
+            return 0
+        res=self.deep(root.left)+self.deep(root.right)
+        res=max(res,self.diameterOfBinaryTree(root.left),self.diameterOfBinaryTree(root.right))
+        return res
+    def deep(self,root):
+        if not root:
+            return 0
+        return max(self.deep(root.left),self.deep(root.right))+1
+
+## 572. 另一个树的子树
+### 问题：给定两个非空二叉树 s 和 t，检验 s 中是否包含和 t 具有相同结构和节点值的子树。s 的一个子树包括 s 的一个节点和这个节点的所有子孙。s 也可以看做它自身的一棵子树。 链接：https://leetcode-cn.com/problems/subtree-of-another-tree/
+### 思路：写一个判断是否为完全相同树的函数，在主函数中调用对每个节点进行判断是否存在完全相同的树
+### 代码：
+
+class Solution(object):
+
+    def isSubtree(self, s, t):
+        """
+        :type s: TreeNode
+        :type t: TreeNode
+        :rtype: bool
+        """
+        if not s:
+            return False
+        return self.isSame(s,t) or self.isSubtree(s.left,t) or self.isSubtree(s.right,t)
+                    
+    
+    def isSame(self,s,t):
+        if s and t:
+            return s.val==t.val and self.isSame(s.left,t.left) and self.isSame(s.right,t.right)
+        elif s==t:
+            return True
+        else:
+            return False
+
+## 581. 最短无序连续子数组
+### 题目：给定一个整数数组，你需要寻找一个连续的子数组，如果对这个子数组进行升序排序，那么整个数组都会变为升序排序。你找到的子数组应是最短的，请输出它的长度。 链接：https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/
+### 思路：原数组与排序后数组对比，找到第一个不同元素与最后一个不同元素位置，相减
+### 代码：
+
+import copy
+class Solution(object):
+
+    def findUnsortedSubarray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        index=0
+        index_1=0
+        l=copy.copy(nums)
+        nums.sort()
+        for i in range(len(nums)):
+            if nums[i]!=l[i]:
+                index=i
+                break
+        for i in range(len(nums)):
+            if nums[len(nums)-i-1]!=l[len(nums)-i-1]:
+                index_1=len(nums)-i
+                break
+        return index_1-index
+        
+ ### 617. 合并二叉树
+ ### 题目：给定两个二叉树，想象当你将它们中的一个覆盖到另一个上时，两个二叉树的一些节点便会重叠。你需要将他们合并为一个新的二叉树。合并的规则是如果两个节点重叠，那么将他们的值相加作为节点合并后的新值，否则不为 NULL 的节点将直接作为新二叉树的节点。 链接：https://leetcode-cn.com/problems/merge-two-binary-trees/
+ ### 思路：直接上代码
+ ### 代码：
+ 
+ class Solution(object):
+ 
+    def mergeTrees(self, t1, t2):
+        """
+        :type t1: TreeNode
+        :type t2: TreeNode
+        :rtype: TreeNode
+        """
+        if not t1:
+            return t2
+        if not t2:
+            return t1
+        t1.val+=t2.val
+        t1.left=self.mergeTrees(t1.left,t2.left)
+        t1.right=self.mergeTrees(t1.right,t2.right)
+        return t1
+
+## 647. 回文子串
+### 题目：给定一个字符串，你的任务是计算这个字符串中有多少个回文子串。具有不同开始位置或结束位置的子串，即使是由相同的字符组成，也会被计为是不同的子串。 链接：https://leetcode-cn.com/problems/palindromic-substrings/
+### 思路：暴力破解，不多说
+### 代码：
+
+class Solution(object):
+
+    def countSubstrings(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        if not s:
+            return 0
+        count=0
+        for index,v in enumerate(s):
+            for index_1,i in enumerate(s[index:]):
+                a=s[index:index+index_1+1]
+                if a==a[::-1]:
+                    count+=1
+        return count
+        
+## 771. 宝石与石头
+### 题目： 给定字符串J 代表石头中宝石的类型，和字符串 S代表你拥有的石头。 S 中每个字符代表了一种你拥有的石头的类型，你想知道你拥有的石头中有多少是宝石。J 中的字母不重复，J 和 S中的所有字符都是字母。字母区分大小写，因此"a"和"A"是不同类型的石头。 链接：https://leetcode-cn.com/problems/jewels-and-stones/
+### 思路：太简单，不说了
+### 代码
+
+class Solution(object):
+
+    def numJewelsInStones(self, J, S):
+        """
+        :type J: str
+        :type S: str
+        :rtype: int
+        """
+        if not J or not S:
+            return 0
+        count=0
+        for i in S:
+            if i in J:
+                count+=1
+        return count
+
