@@ -342,6 +342,26 @@ class Solution(object):
         return b
 
 
+## 141. 环形链表
+### 题目：给定一个链表，判断链表中是否有环。为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。
+### 思路：一个快指针，一个慢指针，快指针走两步，慢指针走一步，如果它们相遇，说明有环
+### 代码：
+
+class Solution(object):
+
+    def hasCycle(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        fast,slow=head,head
+        if not head or not head.next:
+            return False
+        while slow and fast and fast.next:
+            slow,fast=slow.next,fast.next.next
+            if slow==fast:
+                return True
+        return False
 
 ## 543. 二叉树的直径
 ### 问题：给定一棵二叉树，你需要计算它的直径长度。一棵二叉树的直径长度是任意两个结点路径长度中的最大值。这条路径可能穿过根结点。 链接：https://leetcode-cn.com/problems/diameter-of-binary-tree/
